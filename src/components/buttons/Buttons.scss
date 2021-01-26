@@ -1,0 +1,25 @@
+@import '../../utils/variable/variable.scss';
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 100%;
+    background-color: $colorLima;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 2px 3px -1px rgba(0,0,0,0.2);
+
+    .logo-icon{
+        display: flex;
+        height: 30px;
+        width: 30px;
+        border-radius: 500px;
+        object-fit: cover;
+        object-position: center;
+        margin-right: 10px;
+    }
+}

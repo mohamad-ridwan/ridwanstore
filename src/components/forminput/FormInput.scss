@@ -1,0 +1,34 @@
+@import '../../utils/variable/variable.scss';
+
+.box-formInput{
+    display: flex;
+    position: relative;
+
+    .input-column{
+        display: flex;
+        height: auto;
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        padding: 5px 0;
+        color: $colorEmpat;
+        font-size: 11pt;
+        border-bottom: 1.5px solid rgba(179, 131, 255, 0.26);
+        margin-top: 20px;
+    }
+    .input-column::-webkit-input-placeholder{
+        color: #aaa;
+    }
+
+    i{
+        display: flex;
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        font-size: 11pt;
+        color: #ddd;
+        cursor: pointer;
+    }
+}
+

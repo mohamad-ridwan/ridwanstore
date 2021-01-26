@@ -1,3 +1,22 @@
+html{
+  scroll-behavior: smooth;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  background-color: #f1f1f1;
+  overflow-x: hidden;
+  font-family: 'Varela', sans-serif;
+}
+
 .App {
   text-align: center;
 }

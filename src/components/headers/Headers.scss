@@ -1,0 +1,31 @@
+@import '../../utils/variable/variable.scss';
+
+.wrapp-headers{
+    display: flex;
+    position: relative;
+    height: 30vh;
+    width: 100%;
+    background-color: $colorSatu;
+
+    .circle-header{
+        display: flex;
+        position: absolute;
+        right: 0;
+        height: 100%;
+        width: 60%;
+        background-color: $colorDua;
+        opacity: .9;
+        border-bottom-left-radius: 20pc;
+        // border-top-left-radius: 5pc;
+    }
+
+    .title-header{
+        display: flex;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 18pt;
+        font-weight: bold;
+        color: $colorTiga;
+    }
+}
