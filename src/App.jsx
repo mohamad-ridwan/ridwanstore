@@ -2,17 +2,40 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Signin from './pages/signin/Signin';
+import Signup from './pages/signup/Signup';
+import VerifikasiCode from './pages/verifikasicode/VerifikasiCode';
+import WrappContext from './service/context/WrappContext';
+import Home from './pages/home/Home';
+import Allproduct from './pages/allproduct/Allproduct';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/">
-            <Signin />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <WrappContext>
+        <BrowserRouter>
+          <Switch>
+            <Route path='/all-product'>
+              <Allproduct />
+            </Route>
+
+            <Route path="/verification-code">
+              <VerifikasiCode />
+            </Route>
+
+            <Route path="/sign-up">
+              <Signup />
+            </Route>
+
+            <Route path="/sign-in">
+              <Signin />
+            </Route>
+
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </WrappContext>
     </div>
   );
 }

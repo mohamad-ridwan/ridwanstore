@@ -1,0 +1,25 @@
+@import '../../utils/variable/variable.scss';
+
+.header-card{
+    display: flex;
+    height: auto;
+    width: 100%;
+    padding: 20px 10px;
+    align-items: center;
+    justify-content: space-between;
+
+    .title-card{
+        display: flex;
+        font-size: 14pt;
+        color: $colorEmpat;
+        font-weight: bold;
+    }
+
+    .lihat-semua{
+        display: flex;
+        font-size: 12pt;
+        color: $colorSatu;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

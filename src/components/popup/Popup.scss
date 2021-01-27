@@ -1,0 +1,57 @@
+@import '../../utils/variable/variable.scss';
+
+.wrapp-popup{
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 111111;
+
+    .box-white{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        margin: 0 20px;
+        padding: 50px 20px;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+
+        .loading-spinner{
+            display: flex;
+            height: 80px;
+            width: 80px;
+            border: 3px solid $colorDelapan;
+            border-radius: 500px;
+            border-top-color: $colorSatu;
+            animation: 1s spin infinite ease-in-out;
+        }
+
+        .img-pop{
+            display: none;
+            height: 80px;
+            width: 80px;
+            border-radius: 500px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .txt-loading{
+            display: flex;
+            font-size: 12pt;
+            color: $colorTujuh;
+            margin-top: 30px;
+        }
+    }
+}
+
+@keyframes spin{
+    to{
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,59 @@
+@import '../../utils/variable/variable.scss';
+
+.box-card{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px -1px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 10px;
+    padding-bottom: 10px;
+
+    .img-card{
+        display: flex;
+        height: auto;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .price{
+        display: flex;
+        font-size: 11pt;
+        color: $colorSatu;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .name-makaroni{
+        display: -webkit-box;
+        width: auto;
+        margin: 0 10px;
+        padding: 5px 0;
+        font-size: 12pt;
+        color: $colorEmpat;
+        font-weight: bold;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+        justify-content: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .stock{
+        display: flex;
+        font-size: 9pt;
+        color: $colorSatu;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+        font-weight: bold;
+    }
+}

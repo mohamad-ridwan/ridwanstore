@@ -1,0 +1,62 @@
+@import '../../utils/variable/variable.scss';
+
+.wrapp-home{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    background-color: #fff;
+    align-items: center;
+
+    .container-cart-home{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 95%;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+
+        .boxSlide{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slick-slide{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 20px;
+            // border: 1px solid blue;
+        }
+
+        .slick-prev{
+            display: flex;
+            height: auto;
+            width: auto;
+            margin-left: 10px;
+            z-index: 819289121921;
+        }
+        .slick-prev::before{
+            content: '←';
+            font-size: 30pt;
+            color: $colorEmpat;
+        }
+
+        .slick-next{
+            display: flex;
+            height: auto;
+            width: auto;
+            margin-right: 10px;
+        }
+        .slick-next::before{
+            content: '→';
+            font-size: 30pt;
+            color: $colorEmpat;
+        }
+    }
+}
