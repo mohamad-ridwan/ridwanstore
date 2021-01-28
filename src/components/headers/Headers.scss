@@ -52,7 +52,7 @@
     }
 
     .img-profile{
-        display: flex;
+        display: none;
         position: absolute;
         bottom: 20px;
         right: 20px;
@@ -62,5 +62,42 @@
         object-fit: cover;
         object-position: center;
         cursor: pointer;
+    }
+
+    .form-search{
+        display: none;
+        position: absolute;
+        height: auto;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        // padding: 10px;
+        border-radius: 20px;
+        align-items: center;
+        background-color: #fff;
+
+        i{
+            display: flex;
+            font-size: 12pt;
+            color: $colorEmpat;
+            cursor: pointer;
+            margin: 0 10px 0 20px;
+        }
+
+        .input-search{
+            display: flex;
+            height: 100%;
+            width: 90%;
+            outline: none;
+            border: none;
+            font-size: 12pt;
+            color: $colorEmpat;
+            font-weight: bold;
+            padding: 10px 5px;
+            border-radius: 20px;
+        }
+    }
+    .input-search::-webkit-input-placeholder{
+        color: $colorEmpat
     }
 }

@@ -1,0 +1,21 @@
+@import '../../utils/variable/variable.scss';
+
+.wrapp-menu-kategori{
+    display: flex;
+    height: auto;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    color: $colorEmpat;
+    font-weight: bold;
+    font-size: 12pt;
+    text-decoration: none;
+    margin: 0 20px;
+}
+
+.active{
+    background-color: $colorSatu;
+    color: #fff;
+}

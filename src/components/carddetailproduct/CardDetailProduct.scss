@@ -1,0 +1,83 @@
+@import '../../utils/variable/variable.scss';
+
+.container-detailP{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: auto;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+
+    .box-cart-detailP{
+        display: flex;
+        position: absolute;
+        top: -25px;
+        right: 20px;
+        justify-content: center;
+        align-items: center;
+
+        .check{
+            display: flex;
+            position: absolute;
+            font-size: 13pt;
+            color: $colorSembilan;
+            top: -8px;
+            left: -5px;
+        }
+
+        i{
+            display: flex;
+            font-size: 18pt;
+            color: $colorEmpat;
+            cursor: pointer;
+            padding: 10px 0px 0 10px;
+        }
+    }
+
+    .img-detailP{
+        display: flex;
+        height: auto;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .container-deskripsi{
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px;
+
+        .price-detailP{
+            display: flex;
+            font-size: 14pt;
+            color: $colorSatu;
+            font-weight: bold;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .name-detailP{
+            display: flex;
+            font-size: 12pt;
+            color: $colorEmpat;
+            font-weight: bold;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .stock-detailP{
+            display: flex;
+            font-size: 11pt;
+            color: $colorSatu;
+            font-weight: bold;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .deskripsi-detailP{
+            display: flex;
+            font-size: 11pt;
+            color: #aaa;
+            justify-content: center;
+            margin-top: 10px;
+        }
+    }        
+}

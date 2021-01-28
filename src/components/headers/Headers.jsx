@@ -1,7 +1,7 @@
 import React from 'react'
 import './Headers.scss'
 
-export default function Headers({ title, displayBack, clickBack, title2, flexDirectionBoxTitle, bottomBack, heightHeader, imgProfil }) {
+export default function Headers({ title, displayBack, clickBack, title2, flexDirectionBoxTitle, bottomBack, heightHeader, imgProfil, displayImgProfil, displayFormSearch, placeholderSearch, clickProfile }) {
     return (
         <>
             <div className="wrapp-headers" style={{
@@ -29,7 +29,19 @@ export default function Headers({ title, displayBack, clickBack, title2, flexDir
                     </p>
                 </div>
 
-                <img src={imgProfil} alt="" className="img-profile" />
+                <img src={imgProfil} alt="" className="img-profile" style={{
+                    display: `${displayImgProfil}`
+                }}
+                    onClick={clickProfile}
+                />
+                <form action="" className="form-search" style={{
+                    display: `${displayFormSearch}`
+                }}>
+                    <i className="fas fa-search"></i>
+                    <input type="text" className="input-search"
+                        placeholder={placeholderSearch}
+                    />
+                </form>
             </div>
         </>
     )

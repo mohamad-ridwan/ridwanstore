@@ -3,7 +3,64 @@
 .wrapp-allproduct{
     display: flex;
     flex-direction: column;
+    position: relative;
     height: auto;
     width: 100%;
     background-color: #fff;
+
+    .container-allproduct{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 40px 0px;
+
+        .header-menu-katergori{
+            display: flex;
+            height: auto;
+            width: 100%;
+        }        
+
+        .slick-prev{
+            display: flex;
+            height: auto;
+            width: auto;
+            margin-left: 35px;
+            z-index: 819289121921;
+        }
+        .slick-prev::before{
+            content: '←';
+            font-size: 20pt;
+            color: $colorEmpat;
+        }
+
+        .slick-next{
+            display: flex;
+            height: auto;
+            width: auto;
+            margin-right: 35px;
+        }
+        .slick-next::before{
+            content: '→';
+            font-size: 20pt;
+            color: $colorEmpat;
+        }
+
+        .total-makaroni{
+            display: flex;
+            font-size: 12pt;
+            color: $colorEmpat;
+            font-weight: bold;
+            margin: 40px 20px 10px 20px;
+        }
+
+        .column-card-all-product{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            // border: 1px solid blue;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+    }
 }
