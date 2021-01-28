@@ -7,6 +7,8 @@ import VerifikasiCode from './pages/verifikasicode/VerifikasiCode';
 import WrappContext from './service/context/WrappContext';
 import Home from './pages/home/Home';
 import Allproduct from './pages/allproduct/Allproduct';
+import DetailProduct from './pages/detailproduct/DetailProduct';
+import Profile from './pages/profile/Profile';
 
 function App() {
   return (
@@ -14,6 +16,14 @@ function App() {
       <WrappContext>
         <BrowserRouter>
           <Switch>
+            <Route path='/profile'>
+              <Profile />
+            </Route>
+
+            <Route path='/detail-product'>
+              <DetailProduct />
+            </Route>
+
             <Route path='/all-product'>
               <Allproduct />
             </Route>

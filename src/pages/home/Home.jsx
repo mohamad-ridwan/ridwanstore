@@ -20,6 +20,10 @@ export default function Home() {
 
     const history = useHistory()
 
+    const toDetailProduct = () => {
+        history.push('/detail-product')
+    }
+
     const toLihatSemua = () => {
         history.push('/all-product')
     }
@@ -30,6 +34,8 @@ export default function Home() {
                 <Headers
                     heightHeader={'150px'}
                     title={'Home'}
+                    displayImgProfil={'flex'}
+                    clickProfile={() => history.push('/profile')}
                     imgProfil={imgProfil}
                 />
 
@@ -45,12 +51,14 @@ export default function Home() {
                             price={'3.500'}
                             name={'Makaroni Original'}
                             stock={'20'}
+                            clickCard={toDetailProduct}
                         />
                         <Card
                             imgCard={imgCard}
                             price={'3.500'}
                             name={'Makaroni Original'}
                             stock={'20'}
+                            clickCard={toDetailProduct}
                         />
                         <Card
                             imgCard={imgCard}
