@@ -1,11 +1,14 @@
+import GetUserSigninProvider from "./getusersignin/GetUserSignin"
 import SignupProvider from "./signup/Signup"
 
 
 const WrappContext = ({ children }) => {
     return (
-        <SignupProvider>
-            {children}
-        </SignupProvider>
+        <GetUserSigninProvider>
+            <SignupProvider>
+                {children}
+            </SignupProvider>
+        </GetUserSigninProvider>
     )
 }
 
