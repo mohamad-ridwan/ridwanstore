@@ -9,6 +9,7 @@ import Home from './pages/home/Home';
 import Allproduct from './pages/allproduct/Allproduct';
 import DetailProduct from './pages/detailproduct/DetailProduct';
 import Profile from './pages/profile/Profile';
+import Setting from './pages/setting/Setting';
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
       <WrappContext>
         <BrowserRouter>
           <Switch>
+
+            <Route path='/setting'>
+              <Setting />
+            </Route>
+
             <Route path='/profile'>
               <Profile />
             </Route>

@@ -1,10 +1,10 @@
 import React from 'react'
 import './Buttons.scss'
 
-export default function Buttons({ textBtn, click, heightBtn, bgColorBtn, marginBtn, fontSizeBtn, colorBtn, logoIcon, displayLogoIcon, fontWeightBtn, displayBtn }) {
+export default function Buttons({ textBtn, click, heightBtn, bgColorBtn, marginBtn, fontSizeBtn, colorBtn, logoIcon, displayLogoIcon, fontWeightBtn, displayBtn, classNameBtn }) {
     return (
         <>
-            <button className="buttons" onClick={click} style={{
+            <button className={`buttons ${classNameBtn}`} onClick={click} style={{
                 display: `${displayBtn}`,
                 height: `${heightBtn}`,
                 backgroundColor: `${bgColorBtn}`,

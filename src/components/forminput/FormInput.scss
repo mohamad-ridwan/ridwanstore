@@ -31,5 +31,19 @@
         cursor: pointer;
         transition: .3s ease;
     }
+
+    .warning-password{
+        display: none;
+        position: absolute;
+        font-size: 9pt;
+        color: $colorSepuluh;
+        bottom: 0;
+        animation: warning .3s ease forwards;
+    }
 }
 
+@keyframes warning{
+    to{
+        bottom: -20px;
+    }
+}
