@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory, withRouter } from 'react-router-dom';
 import Signin from './pages/signin/Signin';
 import Signup from './pages/signup/Signup';
 import VerifikasiCode from './pages/verifikasicode/VerifikasiCode';
@@ -10,8 +10,11 @@ import Allproduct from './pages/allproduct/Allproduct';
 import DetailProduct from './pages/detailproduct/DetailProduct';
 import Profile from './pages/profile/Profile';
 import Setting from './pages/setting/Setting';
+import API from './service/globalapi';
+import { useEffect } from 'react';
 
 function App() {
+
   return (
     <div className="App">
       <WrappContext>
@@ -56,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App)

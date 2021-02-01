@@ -6,22 +6,8 @@ export const GetUserSigninContext = createContext()
 
 const GetUserSigninProvider = ({ children }) => {
 
-    const [getDataUser, setGetDataUser] = useState({})
-
-    const getDataUserAPI = () => {
-        const getStorage = JSON.parse(localStorage.getItem('userData'))
-        API.APIGetDataUser(getStorage ? getStorage._id : '')
-            .then(res => {
-                setGetDataUser(res)
-            })
-    }
-
-    useEffect(() => {
-        getDataUserAPI()
-    }, [])
-
     return (
-        <GetUserSigninContext.Provider value={[getDataUser, setGetDataUser]}>
+        <GetUserSigninContext.Provider>
             {children}
         </GetUserSigninContext.Provider>
     )

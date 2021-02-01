@@ -1,30 +1,33 @@
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import Buttons from '../../components/buttons/Buttons'
 import Headers from '../../components/headers/Headers'
 import Popup from '../../components/popup/Popup'
-import { SignupContext } from '../../service/context/signup/Signup'
 import imgCeklis from '../../img/ceklis.svg'
 import './VerifikasiCode.scss'
+import { FormDataContext } from '../../service/context/formdata/FormData'
+import API from '../../service/globalapi'
 
 export default function VerifikasiCode() {
 
-    const [nomerHp, setNomerHp, verifikasiCode, setVerifikasiCode] = useContext(SignupContext)
     const [popup, setPopup] = useState(false)
     const [popupSuccess, setPopupSuccess] = useState(false)
+    const [values, setValues, dataSms, setDataSms] = useContext(FormDataContext)
 
     const history = useHistory()
 
     const handleVerifikasi = (e) => {
         const check = e.target.value
-        if (check.length > 4) {
-            if (check === verifikasiCode) {
-                setPopup(true)
-                setTimeout(() => {
-                    setPopup(false)
-                    setPopupSuccess(true)
-                }, 3000)
-            }
+        if (check === dataSms.pesan) {
+            setPopup(true)
+            setTimeout(() => {
+                API.APISignup(...values)
+                    .then(res => {
+                        if (res) {
+                            setPopup(false)
+                            setPopupSuccess(true)
+                        }
+                    })
+            }, 3000)
         }
     }
 
@@ -43,10 +46,13 @@ export default function VerifikasiCode() {
 
                 <div className="container-verifikasi-code">
                     <p className="txt-verifikasi">
-                        Code verifikasi telah di kirim ke nomer Hp ({nomerHp}). Mohon untuk masukkan kode
+                        Code verifikasi telah di kirim ke nomer Hp tertuju. Copy dan paste kodemu disini
+                    </p>
+                    <p className="hl-phoneNumber">
+                        <i className="fas fa-mobile"></i> {values.phoneNumber}
                     </p>
 
-                    <input type="tel" maxLength='5' className="input-verifikasi-code"
+                    <input type="tel" className="input-verifikasi-code"
                         onChange={handleVerifikasi}
                     />
 

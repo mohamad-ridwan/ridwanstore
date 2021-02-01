@@ -14,6 +14,12 @@
         height: 100%;
         width: 100%;
         padding: 50px;
+        
+        .hl-phoneNumber{
+            font-size: 12pt;
+            color: $colorTujuh;
+            margin-top: 10px;
+        }
 
         .txt-verifikasi{
             display: flex;

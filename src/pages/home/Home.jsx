@@ -5,8 +5,6 @@ import Card from '../../components/card/Card'
 import HeaderCard from '../../components/headercard/HeaderCard'
 import Headers from '../../components/headers/Headers'
 import imgProfil from '../../img/avatar.jpg'
-import imgCard from '../../img/enambelas.jpg'
-import { GetUserSigninContext } from '../../service/context/getusersignin/GetUserSignin'
 import API from '../../service/globalapi'
 import './Home.scss'
 
@@ -22,9 +20,8 @@ export default function Home() {
 
     const setAllAPI = () => {
         const getStorage = JSON.parse(localStorage.getItem('userData'))
-
         API.APIGetDataUser(getStorage ? getStorage._id : '')
-            .catch(err => {
+            .catch((err) => {
                 history.push('/sign-in')
                 return err;
             })
@@ -47,8 +44,8 @@ export default function Home() {
     }
 
     useEffect(() => {
-        setAllAPI()
-    }, [])
+        setAllAPI();
+    }, []);
 
     const setting = {
         // dots: true,

@@ -7,7 +7,6 @@ import iconGoogle from '../../img/google.png'
 import API from '../../service/globalapi'
 import './Signin.scss'
 
-
 export default function Signin() {
 
     const [showEye, setShowEye] = useState(false)
