@@ -1,14 +1,13 @@
+import FormDataProvider from "./formdata/FormData"
 import GetUserSigninProvider from "./getusersignin/GetUserSignin"
-import SignupProvider from "./signup/Signup"
-
 
 const WrappContext = ({ children }) => {
     return (
-        <GetUserSigninProvider>
-            <SignupProvider>
+        <FormDataProvider>
+            <GetUserSigninProvider>
                 {children}
-            </SignupProvider>
-        </GetUserSigninProvider>
+            </GetUserSigninProvider>
+        </FormDataProvider>
     )
 }
 

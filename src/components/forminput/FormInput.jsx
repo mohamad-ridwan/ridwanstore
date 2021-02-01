@@ -1,7 +1,7 @@
 import React from 'react'
 import './FormInput.scss'
 
-export default function FormInput({ type, value, placeholder, change, displayEye, clickEye, colorEye, nameInput, onSubmit, displayWarningPassword }) {
+export default function FormInput({ type, value, placeholder, change, displayEye, clickEye, colorEye, nameInput, onSubmit, displayWarningPassword, txtWarningPassword }) {
     return (
         <>
             <form className="box-formInput" onSubmit={onSubmit}>
@@ -17,7 +17,7 @@ export default function FormInput({ type, value, placeholder, change, displayEye
                 <p className="warning-password" style={{
                     display: `${displayWarningPassword}`
                 }}>
-                    Minimal 4 karakter!
+                    {txtWarningPassword}
                 </p>
             </form>
         </>
