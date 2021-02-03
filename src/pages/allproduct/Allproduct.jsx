@@ -5,15 +5,40 @@ import Card from '../../components/card/Card'
 import Headers from '../../components/headers/Headers'
 import MenuKategori from '../../components/menukategori/MenuKategori'
 import imgCard from '../../img/enambelas.jpg'
+import API from '../../service/globalapi'
 import './Allproduct.scss'
 
 class Allproduct extends Component {
+
+    state = {
+        data: [],
+        pathName: {},
+        search: '',
+        data2: []
+    }
 
     setting = {
         dots: false,
         infinite: true,
         slidesToShow: 2,
         slidesToScroll: 1
+    }
+
+    setAllAPI = () => {
+        const id = this.props.match.params.id
+        const path = `v8/makaroni/getall?page=${id}`
+        API.APIGetAllProduct(path)
+            .then(res => {
+                this.setState({ data: res.data, pathName: res.data[0] })
+            })
+    }
+
+    toDetailProduct = (e) => {
+        this.props.history.push(`/detail-product/${e}`)
+    }
+
+    componentDidMount() {
+        this.setAllAPI();
     }
 
     render() {
@@ -26,6 +51,8 @@ class Allproduct extends Component {
                         heightHeader={'150px'}
                         displayFormSearch={'flex'}
                         placeholderSearch={'Cari Makaroni...'}
+                        valueSearch={this.state.search}
+                        changeSearch={(e) => this.setState({ search: e.target.value })}
                     />
 
                     <div className="container-allproduct">
@@ -47,81 +74,30 @@ class Allproduct extends Component {
                         </div>
 
                         <p className="total-makaroni">
-                            20 Makaroni (Semua Harga)
+                            {this.state.data.length} Makaroni ({this.state.pathName.pathName})
                         </p>
                         <div className="column-card-all-product">
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
-                            <Card
-                                imgCard={imgCard}
-                                widthCard={'calc(92%/3)'}
-                                marginCard={'10px 0'}
-                                price={'3.500'}
-                                name={'Makaroni Original'}
-                                stock={'20'}
-                            />
+
+                            {this.state.data.filter((e, i) => {
+                                if (this.state.search == "") {
+                                    return e
+                                } else if (e.name.toLowerCase().includes(this.state.search.toLowerCase())) {
+                                    return e
+                                }
+                            }).map((e, i) => {
+                                return (
+                                    <Card
+                                        key={i._id}
+                                        imgCard={`http://localhost:6235/${e.image}`}
+                                        widthCard={'calc(92%/3)'}
+                                        marginCard={'10px 0'}
+                                        price={e.price}
+                                        name={e.name}
+                                        stock={e.stock}
+                                        clickCard={() => this.toDetailProduct(e._id)}
+                                    />
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

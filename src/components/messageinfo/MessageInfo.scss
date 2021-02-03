@@ -1,0 +1,27 @@
+@import '../../utils/variable/variable.scss';
+
+.container-info-message{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    .img-info{
+        display: flex;
+        height: 150px;
+        width: 150px;
+        border-radius: 500px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .message-info{
+        display: flex;
+        font-size: 12pt;
+        font-weight: bold;
+        color: $colorEmpat;
+        margin-top: 20px;
+    }
+}

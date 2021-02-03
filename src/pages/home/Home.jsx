@@ -4,6 +4,8 @@ import Slider from 'react-slick'
 import Card from '../../components/card/Card'
 import HeaderCard from '../../components/headercard/HeaderCard'
 import Headers from '../../components/headers/Headers'
+import CardNav from '../../components/navbottom/CardNav'
+import Navbottom from '../../components/navbottom/Navbottom'
 import imgProfil from '../../img/avatar.jpg'
 import API from '../../service/globalapi'
 import './Home.scss'
@@ -19,7 +21,7 @@ export default function Home() {
     const history = useHistory()
 
     const setAllAPI = () => {
-        const getStorage = JSON.parse(localStorage.getItem('userData'))
+        const getStorage = JSON.parse(localStorage.getItem('userId'))
         API.APIGetDataUser(getStorage ? getStorage._id : '')
             .catch((err) => {
                 history.push('/sign-in')
@@ -55,12 +57,12 @@ export default function Home() {
         slidesToScroll: 1
     }
 
-    const toDetailProduct = () => {
-        history.push('/detail-product')
+    const toDetailProduct = (e) => {
+        history.push(`/detail-product/${e}`)
     }
 
-    const toLihatSemua = () => {
-        history.push('/all-product')
+    const toLihatSemua = (e) => {
+        history.push(`/all-product/${e}`)
     }
 
     return (
@@ -70,7 +72,6 @@ export default function Home() {
                     heightHeader={'150px'}
                     title={'Home'}
                     displayImgProfil={'flex'}
-                    clickProfile={() => history.push('/setting')}
                     imgProfil={imgProfil}
                 />
 
@@ -78,17 +79,18 @@ export default function Home() {
                     <HeaderCard
                         titleCard={'Semua Harga'}
                         lihatSemua={'Lihat Semua'}
-                        toLihatSemua={toLihatSemua}
+                        toLihatSemua={() => toLihatSemua('1')}
                     />
                     <Slider {...setting} className='boxSlide'>
-                        {semuaHarga && semuaHarga.length > 0 ? semuaHarga.map((e) => {
+                        {semuaHarga && semuaHarga.length > 0 ? semuaHarga.map((e, i) => {
                             return (
                                 <Card
+                                    key={i._id}
                                     imgCard={`http://localhost:6235/${e.image}`}
                                     price={e.price}
                                     name={e.name}
                                     stock={e.stock}
-                                    clickCard={toDetailProduct}
+                                    clickCard={() => toDetailProduct(e._id)}
                                 />
                             )
                         }) : (
@@ -101,16 +103,18 @@ export default function Home() {
                     <HeaderCard
                         titleCard={'Serba Lima Ribu'}
                         lihatSemua={'Lihat Semua'}
+                        toLihatSemua={() => toLihatSemua('2')}
                     />
                     <Slider {...setting} className='boxSlide'>
-                        {limaRibu && limaRibu.length > 0 ? limaRibu.map((e) => {
+                        {limaRibu && limaRibu.length > 0 ? limaRibu.map((e, i) => {
                             return (
                                 <Card
+                                    key={i._id}
                                     imgCard={`http://localhost:6235/${e.image}`}
                                     price={e.price}
                                     name={e.name}
                                     stock={e.stock}
-                                    clickCard={toDetailProduct}
+                                    clickCard={() => toDetailProduct(e._id)}
                                 />
                             )
                         }) : (
@@ -122,16 +126,18 @@ export default function Home() {
                     <HeaderCard
                         titleCard={'Serba Sepuluh Ribu'}
                         lihatSemua={'Lihat Semua'}
+                        toLihatSemua={() => toLihatSemua('3')}
                     />
                     <Slider {...setting} className='boxSlide'>
-                        {sepuluhRibu && sepuluhRibu.length > 0 ? sepuluhRibu.map((e) => {
+                        {sepuluhRibu && sepuluhRibu.length > 0 ? sepuluhRibu.map((e, i) => {
                             return (
                                 <Card
+                                    key={i._id}
                                     imgCard={`http://localhost:6235/${e.image}`}
                                     price={e.price}
                                     name={e.name}
                                     stock={e.stock}
-                                    clickCard={toDetailProduct}
+                                    clickCard={() => toDetailProduct(e._id)}
                                 />
                             )
                         }) : (
@@ -143,16 +149,18 @@ export default function Home() {
                     <HeaderCard
                         titleCard={'Serba Lima Belas Ribu'}
                         lihatSemua={'Lihat Semua'}
+                        toLihatSemua={() => toLihatSemua('4')}
                     />
                     <Slider {...setting} className='boxSlide'>
-                        {limaBelasRibu && limaBelasRibu.length > 0 ? limaBelasRibu.map((e) => {
+                        {limaBelasRibu && limaBelasRibu.length > 0 ? limaBelasRibu.map((e, i) => {
                             return (
                                 <Card
+                                    key={i._id}
                                     imgCard={`http://localhost:6235/${e.image}`}
                                     price={e.price}
                                     name={e.name}
                                     stock={e.stock}
-                                    clickCard={toDetailProduct}
+                                    clickCard={() => toDetailProduct(e._id)}
                                 />
                             )
                         }) : (
@@ -160,6 +168,8 @@ export default function Home() {
                             )}
                     </Slider>
                 </div>
+
+                <Navbottom />
             </div>
         </>
     )

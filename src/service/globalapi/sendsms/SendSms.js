@@ -8,8 +8,9 @@ const SendSms = async (path) => {
             }
         })
             .then(res => res.json())
-            .then((res) => {
-                resolve(console.log('success', res))
+            .then(res => {
+                resolve(res)
+                console.log(res)
             })
             .catch(err => {
                 reject(console.log('failed send SMS : ', err))

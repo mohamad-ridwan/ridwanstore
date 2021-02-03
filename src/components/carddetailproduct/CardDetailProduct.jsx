@@ -3,29 +3,36 @@ import Buttons from '../buttons/Buttons'
 import img from '../../img/enambelas.jpg'
 import './CardDetailProduct.scss'
 
-export default function CardDetailProduct() {
+export default function CardDetailProduct({ data, clickCart }) {
+
+    const URLImg = `http://localhost:6235/${data.image}`
+
     return (
         <>
             <div className="container-detailP">
                 <div className="box-cart-detailP">
-                    <i className="fas fa-check-circle check"></i>
-                    <i className="fas fa-shopping-cart"></i>
+                    <span class="material-icons check">
+                        check_circle
+                    </span>
+                    <span class="material-icons cart" onClick={clickCart}>
+                        shopping_cart
+                    </span>
                 </div>
-                <img src={img} alt="" className="img-detailP" />
+                <img src={URLImg} alt="" className="img-detailP" />
 
                 <div className="container-deskripsi">
                     <p className="price-detailP">
-                        Rp2.000
-                        </p>
+                        Rp{data.price}
+                    </p>
                     <p className="name-detailP">
-                        Makaroni Original
-                        </p>
+                        {data.name}
+                    </p>
                     <p className="stock-detailP">
-                        Stock (20)
+                        Stock ({data.stock})
                         </p>
                     <p className="deskripsi-detailP">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        </p>
+                        {data.deskripsi}
+                    </p>
 
                     <Buttons
                         displayLogoIcon={'none'}

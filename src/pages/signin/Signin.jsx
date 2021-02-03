@@ -4,42 +4,17 @@ import Buttons from '../../components/buttons/Buttons'
 import FormInput from '../../components/forminput/FormInput'
 import Headers from '../../components/headers/Headers'
 import iconGoogle from '../../img/google.png'
-import API from '../../service/globalapi'
+import FormSignin from './FormSignin'
 import './Signin.scss'
+import ValidateSignin from './ValidateSignin'
 
 export default function Signin() {
 
     const [showEye, setShowEye] = useState(false)
-    const [inputLogin, setInputLogin] = useState({
-        username: '',
-        password: ''
-    })
+
+    const { handleChange, values, handleSubmit, errors, errorSignin } = FormSignin(ValidateSignin)
 
     const history = useHistory()
-
-    const handleChange = (e) => {
-        const value = e.target.value
-        let newInputLogin = { ...inputLogin }
-        newInputLogin[e.target.name] = value
-        setInputLogin(newInputLogin)
-    }
-
-    const handleSubmit = (e) => {
-        e.stopPropagation()
-        e.preventDefault()
-        API.APIGetUserSignin(inputLogin.username, inputLogin.password)
-            .then((res) => {
-                if (res) {
-                    const result = res.data
-                    if (result) {
-                        localStorage.setItem('userData', JSON.stringify({ _id: result._id }))
-                        history.push('/')
-                    }
-                }
-            }, (err) => {
-                console.log('error sign in :', err)
-            })
-    }
 
     return (
         <>
@@ -47,13 +22,16 @@ export default function Signin() {
                 <Headers title={'Sign in'} />
 
                 <div className="container1-signIn">
-                    <form action="" className="form-input">
+                    <form className="form-input" onSubmit={handleSubmit}>
                         <FormInput
                             displayEye={'none'}
                             type={'text'}
                             placeholder={'Username'}
                             nameInput={'username'}
+                            displayWarningPassword={'flex'}
+                            txtWarningPassword={errors && errors.username}
                             onSubmit={handleSubmit}
+                            value={values.username}
                             change={handleChange}
                         />
                         <FormInput
@@ -61,7 +39,10 @@ export default function Signin() {
                             placeholder={'Password'}
                             nameInput={'password'}
                             colorEye={showEye ? '#f7cf64' : '#ddd'}
+                            displayWarningPassword={'flex'}
+                            txtWarningPassword={errors && errors.password}
                             onSubmit={handleSubmit}
+                            value={values.password}
                             change={handleChange}
                             clickEye={() => { setShowEye(!showEye) }}
                         />
@@ -73,15 +54,22 @@ export default function Signin() {
                             marginBtn={'40px 0 0 0'}
                             fontSizeBtn={'12pt'}
                             colorBtn={'#444'}
-                            click={handleSubmit}
                         />
+                        <p className="txt-error-signin">
+                            {errorSignin}
+                        </p>
                     </form>
                     <div className="column-bawah">
-                        <p className="txt-sign-up" onClick={() => {
-                            history.push('/sign-up')
-                        }}>
-                            Sign up
-                        </p>
+                        <div className="column-sign-up">
+                            <p className="tanya">
+                                Belum punya akun?
+                            </p>
+                            <p className="txt-sign-up" onClick={() => {
+                                history.push('/sign-up')
+                            }}>
+                                Sign up
+                            </p>
+                        </div>
 
                         <Buttons
                             heightBtn={'40px'}

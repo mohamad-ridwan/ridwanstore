@@ -1,0 +1,35 @@
+@import '../../utils/variable/variable.scss';
+
+.wrapp-btn-navBottom{
+    display: flex;
+    height: auto;
+    width: calc(100%/4);
+    justify-content: center;
+    align-items: center;
+
+    .btn-navBottom{
+        display: flex;
+        height: auto;
+        width: auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: $colorEmpat;
+        text-decoration: none;
+    
+        span{
+            display: flex;
+            font-size: 18pt;
+        }
+    
+        .name-btn-nav{
+            display: flex;
+            font-size: 10pt;
+        }
+    }
+    .active-btn-nav{
+        display: flex;
+        color: $colorSatu;
+        transition: .3s ease;
+    }
+}
