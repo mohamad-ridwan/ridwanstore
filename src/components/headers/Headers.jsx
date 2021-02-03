@@ -1,7 +1,7 @@
 import React from 'react'
 import './Headers.scss'
 
-export default function Headers({ title, displayBack, clickBack, title2, flexDirectionBoxTitle, bottomBack, heightHeader, imgProfil, displayImgProfil, displayFormSearch, placeholderSearch, clickProfile }) {
+export default function Headers({ title, displayBack, clickBack, title2, flexDirectionBoxTitle, bottomBack, heightHeader, imgProfil, displayImgProfil, displayFormSearch, placeholderSearch, clickProfile, changeSearch, valueSearch }) {
     return (
         <>
             <div className="wrapp-headers" style={{
@@ -39,7 +39,9 @@ export default function Headers({ title, displayBack, clickBack, title2, flexDir
                 }}>
                     <i className="fas fa-search"></i>
                     <input type="text" className="input-search"
+                        value={valueSearch}
                         placeholder={placeholderSearch}
+                        onChange={changeSearch}
                     />
                 </form>
             </div>

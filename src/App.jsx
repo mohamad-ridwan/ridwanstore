@@ -12,6 +12,7 @@ import Profile from './pages/profile/Profile';
 import Setting from './pages/setting/Setting';
 import API from './service/globalapi';
 import { useEffect } from 'react';
+import Keranjang from './pages/keranjang/Keranjang';
 
 function App() {
 
@@ -21,6 +22,10 @@ function App() {
         <BrowserRouter>
           <Switch>
 
+            <Route path='/keranjang'>
+              <Keranjang />
+            </Route>
+
             <Route path='/setting'>
               <Setting />
             </Route>
@@ -29,11 +34,11 @@ function App() {
               <Profile />
             </Route>
 
-            <Route path='/detail-product'>
+            <Route path='/detail-product/:id'>
               <DetailProduct />
             </Route>
 
-            <Route path='/all-product'>
+            <Route path='/all-product/:id'>
               <Allproduct />
             </Route>
 

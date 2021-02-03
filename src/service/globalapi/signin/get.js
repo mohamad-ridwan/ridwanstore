@@ -1,6 +1,6 @@
 import { endpoint } from "../endpoint"
 
-export const getUserSignin = async (path, username, password) => {
+export const getUserSignin = async (path, data) => {
     const promise = await new Promise((resolve, reject) => {
         fetch(`${endpoint}/${path}`, {
             method: 'POST',
@@ -9,15 +9,16 @@ export const getUserSignin = async (path, username, password) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username: username,
-                password: password
+                username: data.username,
+                password: data.password
             })
         })
             .then(res => res.json())
             .then((res) => {
                 resolve(res)
-            }, (err) => {
-                reject(console.log('error sign in :', err))
+            })
+            .catch(err => {
+                reject(err)
             })
     })
 

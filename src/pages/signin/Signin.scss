@@ -1,3 +1,5 @@
+@import '../../utils/variable/variable.scss';
+
 .wrapp-signIn{
     display: flex;
     flex-direction: column;
@@ -17,6 +19,15 @@
             flex-direction: column;
             height: auto;
             width: 100%;
+
+            .txt-error-signin{
+                display: flex;
+                font-size: 9pt;
+                text-align: start;
+                color: $colorSepuluh;
+                margin-top: 10px;
+                animation: warning .3s ease forwards;
+            }
         }
 
         .column-bawah{
@@ -25,14 +36,33 @@
             height: auto;
             width: 100%;
 
-            .txt-sign-up{
+            .column-sign-up{
                 display: flex;
                 justify-content: flex-end;
-                cursor: pointer;
+                align-items: center;
                 margin-top: 20px;
-                color: rgb(17, 44, 133);
-                font-size: 11pt;
+
+                .tanya{
+                    display: flex;
+                    font-size: 11pt;
+                    color: $colorEmpat;
+                    margin-right: 10px;
+                }
+
+                .txt-sign-up{
+                    display: flex;
+                    cursor: pointer;
+                    color: rgb(17, 44, 133);
+                    font-size: 11pt;
+                    font-weight: bold;
+                }
             }
         }
+    }
+}
+
+@keyframes warning{
+    to{
+        bottom: -20px;
     }
 }

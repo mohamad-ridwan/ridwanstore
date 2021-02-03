@@ -1,10 +1,10 @@
 @import '../../utils/variable/variable.scss';
 
-.wrapp-detail-product{
+.wrapp-keranjang{
     display: flex;
     flex-direction: column;
     height: auto;
     width: 100%;
-    background-color: #fff;
-    margin-bottom: 60px;
+    justify-content: center;
+    align-items: center;
 }

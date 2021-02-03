@@ -13,7 +13,7 @@ class Profile extends Component {
     }
 
     setAllAPI = () => {
-        const getStorage = JSON.parse(localStorage.getItem('userData'))
+        const getStorage = JSON.parse(localStorage.getItem('userId'))
         API.APIGetDataUser(getStorage ? getStorage._id : '')
             .then((res) => {
                 if (res) {
@@ -27,7 +27,7 @@ class Profile extends Component {
     }
 
     handleLogOut = () => {
-        const storage = localStorage.removeItem('userData')
+        const storage = localStorage.removeItem('userId')
         this.props.history.push('/sign-in')
         return storage
     }
@@ -45,7 +45,7 @@ class Profile extends Component {
                         title={'Profile'}
                         displayBack={'flex'}
                         clickBack={() => {
-                            this.props.history.push('/')
+                            this.props.history.push('/setting')
                         }} />
 
                     <div className="container-profile">

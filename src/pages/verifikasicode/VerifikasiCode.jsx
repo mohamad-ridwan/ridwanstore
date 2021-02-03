@@ -20,7 +20,7 @@ export default function VerifikasiCode() {
         if (check === dataSms.pesan) {
             setPopup(true)
             setTimeout(() => {
-                API.APISignup(...values)
+                API.APISignup(values)
                     .then(res => {
                         if (res) {
                             setPopup(false)
