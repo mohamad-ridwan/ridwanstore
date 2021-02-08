@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Headers from '../../components/headers/Headers'
 import Popup from '../../components/popup/Popup'
 import imgCeklis from '../../img/ceklis.svg'
 import './VerifikasiCode.scss'
 import { FormDataContext } from '../../service/context/formdata/FormData'
-import API from '../../service/globalapi'
+import Buttons from '../../components/buttons/Buttons'
 
-export default function VerifikasiCode() {
+const VerifikasiCode = () => {
 
+    const [values, setValues, dataSms, setDataSms] = useContext(FormDataContext)
     const [popup, setPopup] = useState(false)
     const [popupSuccess, setPopupSuccess] = useState(false)
-    const [values, setValues, dataSms, setDataSms] = useContext(FormDataContext)
 
     const history = useHistory()
 
@@ -19,23 +19,42 @@ export default function VerifikasiCode() {
         const check = e.target.value
         if (check === dataSms.pesan) {
             setPopup(true)
-            setTimeout(() => {
-                API.APISignup(values)
-                    .then(res => {
-                        if (res) {
-                            setPopup(false)
-                            setPopupSuccess(true)
-                        }
-                    })
-            }, 3000)
+            postAPI()
         }
+    }
+
+    const postAPI = () => {
+        fetch('http://localhost:6235/v13/signup/postsignup', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: values.username,
+                email: values.email,
+                phoneNumber: values.phoneNumber,
+                password: values.password,
+                confirmPassword: values.confirmPassword
+            })
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res) {
+                    setTimeout(() => {
+                        setPopup(false)
+                        setPopupSuccess(true)
+                    }, 3000)
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     return (
         <>
             <div className="wrapp-verifikasi-code">
                 <Headers
-                    title={'Enter 5-digit'}
+                    title={'Enter 6-Caracter'}
                     title2={'Verification Code'}
                     displayBack={'flex'}
                     flexDirectionBoxTitle={'column'}
@@ -52,7 +71,7 @@ export default function VerifikasiCode() {
                         <i className="fas fa-mobile"></i> {values.phoneNumber}
                     </p>
 
-                    <input type="tel" className="input-verifikasi-code"
+                    <input type="text" maxLength="6" className="input-verifikasi-code"
                         onChange={handleVerifikasi}
                     />
 
@@ -63,6 +82,7 @@ export default function VerifikasiCode() {
                         marginBtn={'0px 0 20px 0'}
                         fontSizeBtn={'12pt'}
                         colorBtn={'#444'}
+                        click={handle}
                     /> */}
 
                     <p className="resend-verifikasi-code">
@@ -89,3 +109,5 @@ export default function VerifikasiCode() {
         </>
     )
 }
+
+export default VerifikasiCode

@@ -6,26 +6,36 @@ import HeaderCard from '../../components/headercard/HeaderCard'
 import Headers from '../../components/headers/Headers'
 import CardNav from '../../components/navbottom/CardNav'
 import Navbottom from '../../components/navbottom/Navbottom'
+import Popup from '../../components/popup/Popup'
 import imgProfil from '../../img/avatar.jpg'
+import { KeranjangContext } from '../../service/context/keranjang/Keranjang'
 import API from '../../service/globalapi'
 import './Home.scss'
 
 export default function Home() {
 
+    const [data2, setData2] = useState([])
     const [semuaHarga, setSemuaHarga] = useState([])
     const [limaRibu, setLimaRibu] = useState([])
     const [sepuluhRibu, setSepuluhRibu] = useState([])
     const [limaBelasRibu, setLimaBelasRibu] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const path = 'v8/makaroni/getall'
     const history = useHistory()
 
-    const setAllAPI = () => {
+    const settingAllAPI = () => {
         const getStorage = JSON.parse(localStorage.getItem('userId'))
+        const get = getStorage && getStorage._id
         API.APIGetDataUser(getStorage ? getStorage._id : '')
             .catch((err) => {
                 history.push('/sign-in')
                 return err;
+            })
+        API.APIGetKeranjang()
+            .then(res => {
+                const check = res.data.filter((e) => e.idUser == get)
+                setData2(check)
             })
         API.APIGetAllProduct(`${path}?page=1`)
             .then((res) => {
@@ -46,7 +56,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        setAllAPI();
+        settingAllAPI();
     }, []);
 
     const setting = {
@@ -169,7 +179,20 @@ export default function Home() {
                     </Slider>
                 </div>
 
-                <Navbottom />
+                {semuaHarga && semuaHarga.length > 0 ? (
+                    null
+                ) : (
+                        <Popup
+                            displayPopup={loading ? 'flex' : 'none'}
+                            wrappPosition={'fixed'}
+                            displayBtn={'none'}
+                            txtLoading={'Loading...'} />
+                    )}
+
+                <Navbottom
+                    displayTotalKeranjang={data2 && data2.length >= 1 ? 'flex' : 'none'}
+                    total={data2 && data2.length}
+                />
             </div>
         </>
     )

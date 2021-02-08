@@ -12,13 +12,13 @@
     .box-cart-detailP{
         display: flex;
         position: absolute;
-        top: -25px;
+        top: -50px;
         right: 20px;
         justify-content: center;
         align-items: center;
 
         .check{
-            display: flex;
+            display: none;
             position: absolute;
             font-size: 13pt;
             color: $colorSepuluh;

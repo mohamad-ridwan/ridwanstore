@@ -2,11 +2,12 @@ import React from 'react'
 import Buttons from '../buttons/Buttons'
 import './Popup.scss'
 
-export default function Popup({ txtLoading, displayPopup, imgPopup, displayImg, displayLoading, displayBtn, paddingBottomBoxWhite, click }) {
+export default function Popup({ txtLoading, displayPopup, imgPopup, displayImg, displayLoading, displayBtn, paddingBottomBoxWhite, click, wrappPosition }) {
     return (
         <>
             <div className="wrapp-popup" style={{
-                display: `${displayPopup}`
+                display: `${displayPopup}`,
+                position: `${wrappPosition}`
             }}>
                 <div className="box-white" style={{
                     paddingBottom: `${paddingBottomBoxWhite}`

@@ -19,12 +19,31 @@
     
         span{
             display: flex;
-            font-size: 18pt;
+            position: relative;
+            font-size: 18pt;          
         }
+
+        .notif-total-keranjang{
+            display: none;
+            position: absolute;
+            top: 2px;
+            height: 20px;
+            width: 20px;
+            border-radius: 500px;
+            background-color: $colorSepuluh;
+            color: #fff;
+            font-weight: bold;
+            font-size: 9pt;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
     
         .name-btn-nav{
             display: flex;
             font-size: 10pt;
+            font-weight: bold;
         }
     }
     .active-btn-nav{

@@ -1,8 +1,11 @@
 import React, { createContext, useState } from 'react'
+import BuildCaptcha from '../../../pages/signup/BuildCaptcha'
 
 export const FormDataContext = createContext()
 
 const FormDataProvider = ({ children }) => {
+
+    const theCaptcha = BuildCaptcha()
 
     const [values, setValues] = useState({
         username: '',
@@ -16,7 +19,7 @@ const FormDataProvider = ({ children }) => {
         passkey: 'Hm123123',
         email: 'mr643062@gmail.com',
         noTujuan: values.phoneNumber,
-        pesan: `${new Date().getTime()}`
+        pesan: `${theCaptcha.theCaptcha}`
     })
 
     return (

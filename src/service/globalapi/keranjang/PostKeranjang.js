@@ -8,11 +8,17 @@ const PostKeranjang = async (path, data) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ data })
+            body: JSON.stringify({
+                idUser: data.idUser,
+                idProduct: data.idProduct,
+                name: data.name,
+                price: data.price,
+                image: data.image
+            })
         })
             .then(res => res.json())
             .then(res => {
-                resolve(console.log(res))
+                resolve(res)
             })
             .catch(err => {
                 reject(console.log(err))

@@ -9,6 +9,7 @@ const FormSignin = (validate) => {
     })
     const [errors, setErrors] = useState({})
     const [errorSignin, setErrorSignin] = useState('')
+    const [loading, setLoading] = useState(false)
     const history = useHistory()
 
     const handleChange = e => {
@@ -28,18 +29,23 @@ const FormSignin = (validate) => {
         if (check) {
             API.APIGetUserSignin(values)
                 .then(res => {
+                    setLoading(true)
                     const respons = res.data
-                    if (respons) {
-                        localStorage.setItem('userId', JSON.stringify({ _id: respons._id }))
-                        history.push('/')
-                    } else if (!respons) {
-                        setErrorSignin('Username atau password salah!')
-                    }
+                    setTimeout(() => {
+                        if (respons) {
+                            localStorage.setItem('userId', JSON.stringify({ _id: respons._id }))
+                            setLoading(false)
+                            history.push('/')
+                        } else if (!respons) {
+                            setLoading(false)
+                            setErrorSignin('Username atau password salah!')
+                        }
+                    }, 1000)
                 })
         }
     }
 
-    return { handleChange, values, handleSubmit, errors, errorSignin }
+    return { handleChange, values, handleSubmit, errors, errorSignin, loading }
 }
 
 export default FormSignin
