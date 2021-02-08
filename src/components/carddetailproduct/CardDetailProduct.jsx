@@ -3,7 +3,7 @@ import Buttons from '../buttons/Buttons'
 import img from '../../img/enambelas.jpg'
 import './CardDetailProduct.scss'
 
-export default function CardDetailProduct({ data, clickCart }) {
+export default function CardDetailProduct({ data, clickCart, displayCheck }) {
 
     const URLImg = `http://localhost:6235/${data.image}`
 
@@ -11,7 +11,9 @@ export default function CardDetailProduct({ data, clickCart }) {
         <>
             <div className="container-detailP">
                 <div className="box-cart-detailP">
-                    <span class="material-icons check">
+                    <span class="material-icons check" style={{
+                        display: `${displayCheck}`
+                    }}>
                         check_circle
                     </span>
                     <span class="material-icons cart" onClick={clickCart}>

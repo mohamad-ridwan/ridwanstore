@@ -1,0 +1,56 @@
+@import '../../utils/variable/variable.scss';
+
+.wrapp-card-keranjang{
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 1px 4px -1px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    // padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+
+    .delete{
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        cursor: pointer;
+        color: $colorSepuluh;
+    }
+
+    .img-product{
+        display: flex;
+        height: 100px;
+        width: 120px;
+        object-fit: cover;
+        object-position: center;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .column-kanan{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: auto;
+        padding: 0 10px;
+
+        .name-card-keranjang{
+            display: flex;
+            font-size: 10pt;
+            color: $colorEmpat;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .price-card-keranjang{
+            display: flex;
+            font-size: 12pt;
+            color: $colorSatu;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    }
+}

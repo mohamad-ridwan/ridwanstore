@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import Buttons from '../../components/buttons/Buttons'
 import FormInput from '../../components/forminput/FormInput'
 import Headers from '../../components/headers/Headers'
+import Popup from '../../components/popup/Popup'
 import iconGoogle from '../../img/google.png'
 import FormSignin from './FormSignin'
 import './Signin.scss'
@@ -12,7 +13,7 @@ export default function Signin() {
 
     const [showEye, setShowEye] = useState(false)
 
-    const { handleChange, values, handleSubmit, errors, errorSignin } = FormSignin(ValidateSignin)
+    const { handleChange, values, handleSubmit, errors, errorSignin, loading } = FormSignin(ValidateSignin)
 
     const history = useHistory()
 
@@ -83,6 +84,11 @@ export default function Signin() {
                         />
                     </div>
                 </div>
+
+                <Popup
+                    displayPopup={loading ? 'flex' : 'none'}
+                    displayBtn={'none'}
+                    txtLoading={'Loading...'} />
             </div>
         </>
     )

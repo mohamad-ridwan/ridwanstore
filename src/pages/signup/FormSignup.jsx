@@ -1,18 +1,73 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import Buttons from '../../components/buttons/Buttons';
 import FormInput from '../../components/forminput/FormInput';
 import Headers from '../../components/headers/Headers';
-import ValidateInfo from './ValidateInfo';
 import './FormSignup.scss'
-import useForm from './useForm';
+import { FormDataContext } from '../../service/context/formdata/FormData';
+import BuildCaptcha from './BuildCaptcha';
 
-export default function FormSignup({ submitForm }) {
+const FormSignup = () => {
 
+    const theCaptcha = BuildCaptcha()
+
+    const [values, setValues, dataSms, setDataSms] = useContext(FormDataContext)
     const [showEye, setShowEye] = useState(false)
+    const [errors, setErrors] = useState({})
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const history = useHistory()
-    const { handleChange, values, handleSubmit, errors, isSubmitting } = useForm(submitForm, ValidateInfo);
+
+    const handleChange = e => {
+        const { name, value } = e.target
+        setValues({
+            ...values,
+            [name]: value
+        })
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        setErrors(validate(values))
+        setIsSubmitting(true)
+    }
+
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+        history.push('/verification-code')
+        return dataSms.pesan
+    }
+
+    const validate = (values) => {
+        let errors = {}
+
+        if (!values.username) {
+            errors.username = 'Wajib di isi!'
+        }
+
+        if (!values.email) {
+            errors.email = 'Wajib di isi!'
+        } else if (!values.email.includes('@gmail.com')) {
+            errors.email = `Harus berupa '@gmail.com' !`
+        }
+
+        if (!values.phoneNumber) {
+            errors.phoneNumber = 'Wajib di isi!'
+        }
+
+        if (!values.password) {
+            errors.password = 'Wajib di isi!'
+        } else if (values.password.length < 4) {
+            errors.password = 'Minimal 4 karakter!'
+        }
+
+        if (!values.confirmPassword) {
+            errors.confirmPassword = 'Wajib di isi!'
+        } else if (values.password !== values.confirmPassword) {
+            errors.confirmPassword = 'Tidak konfirmasi password!'
+        }
+
+        return errors;
+    }
 
     return (
         <>
@@ -21,8 +76,8 @@ export default function FormSignup({ submitForm }) {
                     history.push('/sign-in')
                 }} />
 
-                <div className="container1-signUp">
-                    <form className="form-input-signUp" onSubmit={handleSubmit}>
+                <form className="container1-signUp" onSubmit={handleSubmit}>
+                    <div className="form-input-signUp">
                         <FormInput
                             displayEye={'none'}
                             type={'text'}
@@ -76,7 +131,7 @@ export default function FormSignup({ submitForm }) {
                             clickEye={() => { setShowEye(!showEye) }}
                         // onSubmit={handleSubmit}
                         />
-                    </form>
+                    </div>
                     <div className="column-bawah-signUp">
                         {/* <div className="column-agree">
                             <input type="checkbox" name="" id="" className='checkbox' onClick={() => {
@@ -108,8 +163,11 @@ export default function FormSignup({ submitForm }) {
                             click={handleSubmit}
                         />
                     </div>
-                </div>
+                </form>
             </div>
+
         </>
     )
 }
+
+export default FormSignup

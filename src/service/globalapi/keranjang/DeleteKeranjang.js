@@ -1,23 +1,20 @@
 import { endpoint } from "../endpoint"
 
-const GetKeranjang = async (path) => {
+const DeleteKeranjang = async (path) => {
     const promise = await new Promise((resolve, reject) => {
         fetch(`${endpoint}/${path}`, {
-            method: 'GET',
+            method: 'DELETE',
             mode: 'cors',
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then(res => res.json())
-            .then(res => {
-                resolve(res)
-            })
-            .catch(err => {
-                reject(console.log(err))
-            })
+            .then(res => resolve(res))
+            .catch(err => reject(console.log(err)))
     })
+
     return promise
 }
 
-export default GetKeranjang
+export default DeleteKeranjang

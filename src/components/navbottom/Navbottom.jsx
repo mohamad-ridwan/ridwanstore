@@ -2,7 +2,7 @@ import React from 'react'
 import CardNav from './CardNav'
 import './Navbottom.scss'
 
-export default function Navbottom() {
+export default function Navbottom({ displayTotalKeranjang, total }) {
     return (
         <>
             <div className="wrapp-nav-bottom">
@@ -12,6 +12,8 @@ export default function Navbottom() {
                     to={'/'}
                 />
                 <CardNav
+                    displayTotalKeranjang={displayTotalKeranjang}
+                    total={total}
                     nameIcon={'shopping_cart'}
                     nameBtn={'Keranjang'}
                     to={'/keranjang'}

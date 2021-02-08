@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import Headers from '../../components/headers/Headers'
 import InputProfile from '../../components/inputprofile/InputProfile'
+import Popup from '../../components/popup/Popup'
 import img from '../../img/avatar.jpg'
 import API from '../../service/globalapi'
 import './Profile.scss'
@@ -9,7 +10,8 @@ import './Profile.scss'
 class Profile extends Component {
 
     state = {
-        dataUser: {}
+        dataUser: {},
+        loading: true
     }
 
     setAllAPI = () => {
@@ -37,6 +39,9 @@ class Profile extends Component {
     }
 
     render() {
+
+        const data = this.state.dataUser
+
         return (
             <>
                 <div className="wrapp-profile">
@@ -78,6 +83,16 @@ class Profile extends Component {
                             Log out
                         </button>
                     </div>
+
+                    {data && Object.keys(data).length > 0 ? (
+                        null
+                    ) : (
+                            <Popup
+                                displayPopup={this.state.loading ? 'flex' : 'none'}
+                                wrappPosition={'fixed'}
+                                displayBtn={'none'}
+                                txtLoading={'Loading...'} />
+                        )}
                 </div>
             </>
         )

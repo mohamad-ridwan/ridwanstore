@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch, useHistory, withRouter } from 'react-router-dom';
 import Signin from './pages/signin/Signin';
-import Signup from './pages/signup/Signup';
 import VerifikasiCode from './pages/verifikasicode/VerifikasiCode';
 import WrappContext from './service/context/WrappContext';
 import Home from './pages/home/Home';
@@ -13,6 +12,7 @@ import Setting from './pages/setting/Setting';
 import API from './service/globalapi';
 import { useEffect } from 'react';
 import Keranjang from './pages/keranjang/Keranjang';
+import FormSignup from './pages/signup/FormSignup';
 
 function App() {
 
@@ -47,7 +47,7 @@ function App() {
             </Route>
 
             <Route path="/sign-up">
-              <Signup />
+              <FormSignup />
             </Route>
 
             <Route path="/sign-in">
