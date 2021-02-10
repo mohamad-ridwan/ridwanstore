@@ -13,55 +13,64 @@ import API from './service/globalapi';
 import { useEffect } from 'react';
 import Keranjang from './pages/keranjang/Keranjang';
 import FormSignup from './pages/signup/FormSignup';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import GlobalReducer from './service/redux/GlobalReducer';
 
 function App() {
 
+  const { reducer } = GlobalReducer()
+
+  const store = createStore(reducer)
+
   return (
     <div className="App">
-      <WrappContext>
-        <BrowserRouter>
-          <Switch>
+      <Provider store={store}>
+        <WrappContext>
+          <BrowserRouter>
+            <Switch>
 
-            <Route path='/keranjang'>
-              <Keranjang />
-            </Route>
+              <Route path='/keranjang'>
+                <Keranjang />
+              </Route>
 
-            <Route path='/setting'>
-              <Setting />
-            </Route>
+              <Route path='/setting'>
+                <Setting />
+              </Route>
 
-            <Route path='/profile'>
-              <Profile />
-            </Route>
+              <Route path='/profile'>
+                <Profile />
+              </Route>
 
-            <Route path='/detail-product/:id'>
-              <DetailProduct />
-            </Route>
+              <Route path='/detail-product/:id'>
+                <DetailProduct />
+              </Route>
 
-            <Route path='/all-product/:id'>
-              <Allproduct />
-            </Route>
+              <Route path='/all-product/:id'>
+                <Allproduct />
+              </Route>
 
-            <Route path="/verification-code">
-              <VerifikasiCode />
-            </Route>
+              <Route path="/verification-code">
+                <VerifikasiCode />
+              </Route>
 
-            <Route path="/sign-up">
-              <FormSignup />
-            </Route>
+              <Route path="/sign-up">
+                <FormSignup />
+              </Route>
 
-            <Route path="/sign-in">
-              <Signin />
-            </Route>
+              <Route path="/sign-in">
+                <Signin />
+              </Route>
 
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </WrappContext>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </WrappContext>
+      </Provider>
     </div>
   );
 }
 
-export default withRouter(App)
+export default (App)

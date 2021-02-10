@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Slider from 'react-slick'
 import Card from '../../components/card/Card'
@@ -10,9 +10,11 @@ import Popup from '../../components/popup/Popup'
 import imgProfil from '../../img/avatar.jpg'
 import { KeranjangContext } from '../../service/context/keranjang/Keranjang'
 import API from '../../service/globalapi'
+import { connect } from 'react-redux'
 import './Home.scss'
+import ActionType from '../../service/redux/GlobalActionType'
 
-export default function Home() {
+const Home = ({ dataKeranjang, getKeranjang }) => {
 
     const [data2, setData2] = useState([])
     const [semuaHarga, setSemuaHarga] = useState([])
@@ -191,9 +193,18 @@ export default function Home() {
 
                 <Navbottom
                     displayTotalKeranjang={data2 && data2.length >= 1 ? 'flex' : 'none'}
-                    total={data2 && data2.length}
+                    total={data2.length}
                 />
             </div>
         </>
     )
 }
+const mapStateToProps = state => ({
+    dataKeranjang: state.dataKeranjang
+})
+
+const mapDispatchToProps = dispatch => ({
+    getKeranjang: () => dispatch({ type: ActionType.GET_KERANJANG })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

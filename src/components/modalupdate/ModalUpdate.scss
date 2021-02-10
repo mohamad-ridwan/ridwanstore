@@ -1,0 +1,45 @@
+@import '../../utils/variable/variable.scss';
+
+.modal-update-user{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    background-color: rgba(0,0,0,0.6);
+
+    .box-white-modal-update{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+
+        .txt-modal-update{
+            display: flex;
+            font-size: 12pt;
+            color: $colorEmpat;
+            font-weight: bold;
+            justify-content: center;
+        }
+
+        .form-modal-update{
+            display: flex;
+            flex-direction: column;
+            // margin-top: 20px;
+        }
+
+        .column-btn-submit-modal{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+    }
+}

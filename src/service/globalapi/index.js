@@ -5,6 +5,7 @@ import GetKeranjang from "./keranjang/GetKeranjang";
 import PostKeranjang from "./keranjang/PostKeranjang";
 import SendSms from "./sendsms/SendSms";
 import { getUserSignin } from "./signin/get";
+import UpdateUser from "./signin/updateuser";
 
 const getStorage = JSON.parse(localStorage.getItem('userData'))
 
@@ -15,6 +16,7 @@ const APISendSms = (path) => SendSms(path)
 const APIPostKeranjang = (data) => PostKeranjang('v7/makaroni/postkeranjang', data)
 const APIGetKeranjang = () => GetKeranjang(`v7/makaroni/getkeranjang`)
 const APIDeleteKeranjang = (id) => DeleteKeranjang(`v7/makaroni/postkeranjang/${id}`)
+const APIUpdateUser = (path, data) => UpdateUser(`v13/signup/postsignup/${path}`, data)
 
 const API = {
     APIGetAllProduct,
@@ -23,7 +25,8 @@ const API = {
     APISendSms,
     APIPostKeranjang,
     APIGetKeranjang,
-    APIDeleteKeranjang
+    APIDeleteKeranjang,
+    APIUpdateUser
 }
 
 export default API
