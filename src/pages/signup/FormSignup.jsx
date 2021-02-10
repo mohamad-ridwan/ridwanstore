@@ -6,6 +6,7 @@ import Headers from '../../components/headers/Headers';
 import './FormSignup.scss'
 import { FormDataContext } from '../../service/context/formdata/FormData';
 import BuildCaptcha from './BuildCaptcha';
+import axios from 'axios';
 
 const FormSignup = () => {
 
@@ -24,17 +25,6 @@ const FormSignup = () => {
             ...values,
             [name]: value
         })
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        setErrors(validate(values))
-        setIsSubmitting(true)
-    }
-
-    if (Object.keys(errors).length === 0 && isSubmitting) {
-        history.push('/verification-code')
-        return dataSms.pesan
     }
 
     const validate = (values) => {
@@ -67,6 +57,41 @@ const FormSignup = () => {
         }
 
         return errors;
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        setErrors(validate(values))
+        setIsSubmitting(true)
+    }
+
+    const handleSendSMS = async () => {
+        const passKey = 'Hm123123'
+        const path = `https://reguler.medansms.co.id/sms_api.php?action=kirim_sms&email=${dataSms.email}&passkey=${passKey}&no_tujuan=${values.phoneNumber}&pesan=Kode verifikasi : ${dataSms.pesan}`
+        await new Promise((resolve, reject) => {
+            axios.post(`${path}`, {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: {
+                    kodeVerifikasi: dataSms.pesan
+                }
+            })
+                .then(res => {
+                    const responsData = {
+                        status: res.data.status,
+                        statusText: res.data.statusText,
+                        data: res.data.config.data
+                    }
+                    resolve(console.log(responsData))
+                })
+                .catch(err => reject(console.log(err)))
+        })
+    }
+
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+        history.push('/verification-code')
+        handleSendSMS();
     }
 
     return (
