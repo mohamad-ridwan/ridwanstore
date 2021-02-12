@@ -91,8 +91,6 @@ export default function Signin() {
         }
     }
 
-    // Test
-
     const responseGoogle = (res) => {
         const result = res.profileObj
         postSignup(result)
