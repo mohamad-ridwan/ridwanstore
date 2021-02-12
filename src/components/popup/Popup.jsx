@@ -2,7 +2,7 @@ import React from 'react'
 import Buttons from '../buttons/Buttons'
 import './Popup.scss'
 
-export default function Popup({ txtLoading, displayPopup, imgPopup, displayImg, displayLoading, displayBtn, paddingBottomBoxWhite, click, wrappPosition }) {
+export default function Popup({ txtLoading, displayPopup, imgPopup, displayImg, displayLoading, displayBtn, paddingBottomBoxWhite, click, wrappPosition, textBtn }) {
     return (
         <>
             <div className="wrapp-popup" style={{
@@ -28,7 +28,7 @@ export default function Popup({ txtLoading, displayPopup, imgPopup, displayImg, 
                         displayBtn={displayBtn}
                         displayLogoIcon={'none'}
                         heightBtn={'50px'}
-                        textBtn={'Sign in'}
+                        textBtn={textBtn}
                         marginBtn={'40px 0 0 0'}
                         fontSizeBtn={'12pt'}
                         colorBtn={'#444'}

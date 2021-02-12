@@ -16,6 +16,7 @@ import FormSignup from './pages/signup/FormSignup';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import GlobalReducer from './service/redux/GlobalReducer';
+import UbahPassword from './pages/ubahpassword/UbahPassword';
 
 function App() {
 
@@ -29,6 +30,10 @@ function App() {
         <WrappContext>
           <BrowserRouter>
             <Switch>
+
+              <Route path='/ubah-password'>
+                <UbahPassword />
+              </Route>
 
               <Route path='/keranjang'>
                 <Keranjang />

@@ -32,6 +32,13 @@ export default function Setting() {
                             arrow_forward_ios
                         </span>
                     </button>
+                    <button className="btn-link-setting" onClick={() => history.push('/ubah-password')}>
+                        Ubah Password
+
+                        <span className="material-icons">
+                            arrow_forward_ios
+                        </span>
+                    </button>
                 </div>
             </div>
         </>

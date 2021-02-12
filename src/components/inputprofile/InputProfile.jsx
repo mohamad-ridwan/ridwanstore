@@ -9,7 +9,7 @@ export default function InputProfile({ titleInput, type, txtInput, clickPencil }
                     {titleInput}
                 </p>
 
-                <p className="input-profile" >
+                <p className="input-profile">
                     {txtInput}
                 </p>
 

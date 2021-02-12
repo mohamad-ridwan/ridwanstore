@@ -22,6 +22,9 @@ const Home = ({ dataKeranjang, getKeranjang }) => {
     const [sepuluhRibu, setSepuluhRibu] = useState([])
     const [limaBelasRibu, setLimaBelasRibu] = useState([])
     const [loading, setLoading] = useState(true)
+    const [imageUser, setImageUser] = useState({
+        imageUrl: ''
+    })
 
     const path = 'v8/makaroni/getall'
     const history = useHistory()
@@ -30,6 +33,13 @@ const Home = ({ dataKeranjang, getKeranjang }) => {
         const getStorage = JSON.parse(localStorage.getItem('userId'))
         const get = getStorage && getStorage._id
         API.APIGetDataUser(getStorage ? getStorage._id : '')
+            .then(res => {
+                const newImageUser = res.accountGoogle.imageUrl
+                const checkImageUrl = res.accountGoogle.imageUrl.includes('https')
+                if (checkImageUrl) {
+                    setImageUser({ imageUrl: newImageUser })
+                }
+            })
             .catch((err) => {
                 history.push('/sign-in')
                 return err;
@@ -84,7 +94,7 @@ const Home = ({ dataKeranjang, getKeranjang }) => {
                     heightHeader={'150px'}
                     title={'Home'}
                     displayImgProfil={'flex'}
-                    imgProfil={imgProfil}
+                    imgProfil={`${imageUser && imageUser.imageUrl || imgProfil}`}
                 />
 
                 <div className="container-cart-home">

@@ -3,7 +3,7 @@ import Buttons from '../buttons/Buttons'
 import FormInput from '../forminput/FormInput'
 import './ModalUpdate.scss'
 
-const ModalUpdate = ({ values, changeInput, submit, titleModalUpdate, placeholder, nameInput, btnCancel, btnOkay, displayModal, clickCancel }) => {
+const ModalUpdate = ({ values, changeInput, submit, titleModalUpdate, placeholder, nameInput, btnCancel, btnOkay, displayModal, clickCancel, displayFormInput, type, type2, placeholder2, nameInput2, values2, changeInput2, displayEye, clickEye, clickEye2, colorEye, colorEye2, txtWarningPassword, txtWarningPassword2, bgColorBtn }) => {
     return (
         <>
             <div className="modal-update-user" style={{
@@ -16,12 +16,29 @@ const ModalUpdate = ({ values, changeInput, submit, titleModalUpdate, placeholde
 
                     <form className="form-modal-update" onSubmit={submit}>
                         <FormInput
-                            displayEye={'none'}
-                            type={'text'}
+                            displayEye={displayEye}
+                            type={type}
                             placeholder={placeholder}
                             nameInput={nameInput}
                             value={values}
                             change={changeInput}
+                            clickEye={clickEye}
+                            colorEye={colorEye}
+                            txtWarningPassword={txtWarningPassword}
+                            displayWarningPassword={'flex'}
+                        />
+                        <FormInput
+                            displayFormInput={displayFormInput}
+                            displayEye={'flex'}
+                            type={type2}
+                            placeholder={placeholder2}
+                            nameInput={nameInput2}
+                            value={values2}
+                            change={changeInput2}
+                            clickEye={clickEye2}
+                            colorEye={colorEye2}
+                            txtWarningPassword={txtWarningPassword2}
+                            displayWarningPassword={'flex'}
                         />
                     </form>
 
@@ -43,6 +60,7 @@ const ModalUpdate = ({ values, changeInput, submit, titleModalUpdate, placeholde
                             marginBtn={'0px 0 0 0'}
                             fontSizeBtn={'12pt'}
                             colorBtn={'#444'}
+                            bgColorBtn={bgColorBtn}
                             click={submit}
                         />
                     </div>
