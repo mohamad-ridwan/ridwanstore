@@ -6,14 +6,25 @@ import imgCeklis from '../../img/ceklis.svg'
 import './VerifikasiCode.scss'
 import { FormDataContext } from '../../service/context/formdata/FormData'
 import Buttons from '../../components/buttons/Buttons'
+import API from '../../service/globalapi'
 
 const VerifikasiCode = () => {
 
     const [values, setValues, dataSms, setDataSms] = useContext(FormDataContext)
     const [popup, setPopup] = useState(false)
     const [popupSuccess, setPopupSuccess] = useState(false)
+    const [dataAllUser, setDataAllUser] = useState([])
+    const [errorMessage, setErrorMessage] = useState('')
+    const [displayError, setDisplayError] = useState(false)
 
     const history = useHistory()
+
+    const setAllAPI = () => {
+        API.APIGetAllUser()
+            .then(res => {
+                setDataAllUser(res.data)
+            })
+    }
 
     const handleVerifikasi = (e) => {
         const check = e.target.value
@@ -24,31 +35,43 @@ const VerifikasiCode = () => {
     }
 
     const postAPI = () => {
-        fetch('http://localhost:6235/v13/signup/postsignup', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: values.username,
-                email: values.email,
-                phoneNumber: values.phoneNumber,
-                password: values.password,
-                confirmPassword: values.confirmPassword
-            })
-        })
-            .then(res => res.json())
-            .then(res => {
-                if (res) {
-                    setTimeout(() => {
-                        setPopup(false)
-                        setPopupSuccess(true)
-                    }, 3000)
-                }
-            })
-            .catch(err => console.log(err))
+        const dataPost = {
+            idUser: `${new Date().getTime()}`,
+            username: values.username,
+            email: values.email,
+            phoneNumber: values.phoneNumber,
+            password: values.password,
+            confirmPassword: values.confirmPassword,
+            googleId: 'non-google',
+            givenName: 'non-google',
+            familyName: 'non-google',
+            name: 'non-google',
+            emailGoogle: 'non-google',
+            imageUrl: 'non-google'
+        }
+        const checkDataUser = dataAllUser.filter(e => e.email !== `${values.email}` && e.password !== 'non-password')
+        if (checkDataUser.length === 0) {
+            API.APIPostSignup(dataPost)
+                .then(res => {
+                    if (res) {
+                        setTimeout(() => {
+                            setPopup(false)
+                            setPopupSuccess(true)
+                        }, 3000)
+                    }
+                }, (err) => {
+                    setPopup(false);
+                    return err;
+                })
+        } else {
+            setErrorMessage('Oops!\nAkun ini sudah pernah dibuat sebelumnya!')
+            setDisplayError(true)
+        }
     }
+
+    useEffect(() => {
+        setAllAPI();
+    }, [])
 
     return (
         <>
@@ -95,12 +118,23 @@ const VerifikasiCode = () => {
                     displayBtn={'none'}
                     txtLoading={'Loading...'} />
                 <Popup
+                    displayPopup={displayError ? 'flex' : 'none'}
+                    imgPopup={imgCeklis}
+                    displayLoading={'none'}
+                    displayImg={'flex'}
+                    txtLoading={errorMessage}
+                    paddingBottomBoxWhite={'20px'}
+                    textBtn={'Oke'}
+                    click={() => setDisplayError(false)}
+                />
+                <Popup
                     displayPopup={popupSuccess ? 'flex' : 'none'}
                     imgPopup={imgCeklis}
                     displayLoading={'none'}
                     displayImg={'flex'}
                     txtLoading={'Akun kamu berhasil di buat!'}
                     paddingBottomBoxWhite={'20px'}
+                    textBtn={'Sign-in'}
                     click={() => {
                         history.push('/sign-in')
                     }}

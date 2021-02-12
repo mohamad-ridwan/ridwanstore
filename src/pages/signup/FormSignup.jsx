@@ -6,7 +6,6 @@ import Headers from '../../components/headers/Headers';
 import './FormSignup.scss'
 import { FormDataContext } from '../../service/context/formdata/FormData';
 import BuildCaptcha from './BuildCaptcha';
-import axios from 'axios';
 
 const FormSignup = () => {
 
@@ -14,6 +13,7 @@ const FormSignup = () => {
 
     const [values, setValues, dataSms, setDataSms] = useContext(FormDataContext)
     const [showEye, setShowEye] = useState(false)
+    const [showEye2, setShowEye2] = useState(false)
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -69,12 +69,11 @@ const FormSignup = () => {
         const passKey = 'Hm123123'
         const path = `https://reguler.medansms.co.id/sms_api.php?action=kirim_sms&email=${dataSms.email}&passkey=${passKey}&no_tujuan=${values.phoneNumber}&pesan=Kode verifikasi : ${dataSms.pesan}`
         await new Promise((resolve, reject) => {
-            axios.post(`${path}`, {
+            fetch(path, {
+                method: 'POST',
+                mode: 'cors',
                 headers: {
                     "Content-Type": "application/json"
-                },
-                data: {
-                    kodeVerifikasi: dataSms.pesan
                 }
             })
                 .then(res => {
@@ -145,15 +144,15 @@ const FormSignup = () => {
                             clickEye={() => { setShowEye(!showEye) }}
                         />
                         <FormInput
-                            type={showEye ? 'text' : 'password'}
-                            colorEye={showEye ? '#f7cf64' : '#ddd'}
+                            type={showEye2 ? 'text' : 'password'}
+                            colorEye={showEye2 ? '#f7cf64' : '#ddd'}
                             placeholder={'Confirm password'}
                             nameInput={'confirmPassword'}
                             txtWarningPassword={errors.confirmPassword}
                             displayWarningPassword={'flex'}
                             value={values.confirmPassword}
                             change={handleChange}
-                            clickEye={() => { setShowEye(!showEye) }}
+                            clickEye={() => { setShowEye2(!showEye2) }}
                         // onSubmit={handleSubmit}
                         />
                     </div>

@@ -21,6 +21,9 @@ class Profile extends Component {
         displayEmail: false,
         displayPhoneNumber: false,
         popupSuccess: false,
+        bgColorBtn: false,
+        txtWarningEmail: '',
+        imageUser: '',
         change: ''
     }
 
@@ -29,7 +32,8 @@ class Profile extends Component {
         API.APIGetDataUser(getStorage ? getStorage._id : '')
             .then((res) => {
                 if (res) {
-                    this.setState({ dataUser: res })
+                    const newImgUrl = res.accountGoogle.imageUrl
+                    this.setState({ dataUser: res, imageUser: newImgUrl })
                 }
             })
             .catch(err => {
@@ -63,6 +67,15 @@ class Profile extends Component {
     changeUsername = (e) => {
         const value = e.target.value
         this.setState({ change: value })
+        const { username, email, phoneNumber } = { ...this.state.dataUser }
+        if (!value) {
+            this.setState({ bgColorBtn: false })
+        } else if (value.length > 0) {
+            this.setState({ bgColorBtn: true })
+        }
+        if (value == username || value == email || value == phoneNumber) {
+            this.setState({ bgColorBtn: false })
+        }
     }
 
     handleSubmit = (e) => {
@@ -77,14 +90,20 @@ class Profile extends Component {
                     phoneNumber: phoneNumber
                 }
                 this.updateProfileUser(data)
+                this.setState({ bgColorBtn: false })
             }
             if (result !== email && this.state.displayEmail) {
-                const data = {
-                    username: username,
-                    email: result,
-                    phoneNumber: phoneNumber
+                if (result.includes('@gmail.com')) {
+                    const data = {
+                        username: username,
+                        email: result,
+                        phoneNumber: phoneNumber
+                    }
+                    this.updateProfileUser(data)
+                    this.setState({ bgColorBtn: false })
+                } else {
+                    this.setState({ txtWarningEmail: `Harus berupa '@gmail.com'` })
                 }
-                this.updateProfileUser(data)
             }
             if (result !== phoneNumber && this.state.displayPhoneNumber) {
                 const data = {
@@ -93,6 +112,7 @@ class Profile extends Component {
                     phoneNumber: result
                 }
                 this.updateProfileUser(data)
+                this.setState({ bgColorBtn: false })
             }
         }
     }
@@ -112,7 +132,7 @@ class Profile extends Component {
                             this.setState({ displayUsername: false })
                         }
                         if (this.state.displayEmail) {
-                            this.setState({ displayEmail: false })
+                            this.setState({ displayEmail: false, txtWarningEmail: '' })
                         }
                         if (this.state.displayPhoneNumber) {
                             this.setState({ displayPhoneNumber: false })
@@ -137,6 +157,7 @@ class Profile extends Component {
     render() {
 
         const data = this.state.dataUser
+        const { imageUser } = this.state
 
         return (
             <>
@@ -150,7 +171,7 @@ class Profile extends Component {
                         }} />
 
                     <div className="container-profile">
-                        <img src={img} alt="" className="img-profile-user" />
+                        <img src={`${imageUser || img}`} alt="" className="img-profile-user" />
                         <p className="name-profile">
                             {this.state.dataUser.username}
                         </p>
@@ -197,9 +218,13 @@ class Profile extends Component {
 
                     <ModalUpdate
                         displayModal={this.state.displayUsername ? 'flex' : 'none'}
+                        displayFormInput={'none'}
+                        displayEye={'none'}
+                        type={'text'}
                         titleModalUpdate={'Ubah Nama Kamu'}
                         placeholder={'Nama'}
                         nameInput={'username'}
+                        bgColorBtn={this.state.bgColorBtn ? '#fdc426' : '#eee'}
                         values={this.state.change}
                         changeInput={this.changeUsername}
                         btnCancel={'Batal'}
@@ -210,6 +235,11 @@ class Profile extends Component {
 
                     <ModalUpdate
                         displayModal={this.state.displayEmail ? 'flex' : 'none'}
+                        displayFormInput={'none'}
+                        displayEye={'none'}
+                        type={'email'}
+                        bgColorBtn={this.state.bgColorBtn ? '#fdc426' : '#eee'}
+                        txtWarningPassword={this.state.txtWarningEmail}
                         titleModalUpdate={'Ubah Email Kamu'}
                         placeholder={'Email'}
                         nameInput={'email'}
@@ -223,6 +253,10 @@ class Profile extends Component {
 
                     <ModalUpdate
                         displayModal={this.state.displayPhoneNumber ? 'flex' : 'none'}
+                        bgColorBtn={this.state.bgColorBtn ? '#fdc426' : '#eee'}
+                        displayFormInput={'none'}
+                        displayEye={'none'}
+                        type={'telp'}
                         titleModalUpdate={'Ubah Nomer Hp Kamu'}
                         placeholder={'Nomer Hp'}
                         nameInput={'phoneNumber'}
